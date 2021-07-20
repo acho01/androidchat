@@ -1,7 +1,8 @@
-package ge.akikalia.asharashenidze.AndroidChat
+package ge.akikalia.asharashenidze.AndroidChat.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import ge.akikalia.asharashenidze.AndroidChat.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
