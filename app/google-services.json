@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "691179763025",
+    "project_id": "androidchat-606b8",
+    "storage_bucket": "androidchat-606b8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:691179763025:android:28734d2e3f83a5a52ecf70",
+        "android_client_info": {
+          "package_name": "ge.akikalia.asharashenidze.AndroidChat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "691179763025-a6b4bg4kl7f022t90llm0l29u07u1hot.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtuyyNPdTZ7LCqHm2KB6rSMbGA1l75pz4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "691179763025-a6b4bg4kl7f022t90llm0l29u07u1hot.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
