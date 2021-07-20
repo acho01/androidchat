@@ -1,4 +1,4 @@
-package ge.akikalia.asharashenidze.AndroidChat.register
+package ge.akikalia.asharashenidze.AndroidChat.register.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
