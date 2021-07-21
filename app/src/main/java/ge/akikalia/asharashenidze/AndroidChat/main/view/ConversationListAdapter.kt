@@ -33,7 +33,7 @@ class ConversationListAdapter(): RecyclerView.Adapter<ConversationListAdapter.Co
             name.text = conversation.name
         }
 
-        private val name = view.findViewById<TextView>(R.id.conversationListItemText)
+        private val name = view.findViewById<TextView>(R.id.conversationListItemName)
 
     }
 }
