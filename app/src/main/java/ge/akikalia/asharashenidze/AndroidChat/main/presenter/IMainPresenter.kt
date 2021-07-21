@@ -1,5 +1,5 @@
 package ge.akikalia.asharashenidze.AndroidChat.main.presenter
 
-class MainPresenter: IMainPresenter {
+interface IMainPresenter{
 
 }
