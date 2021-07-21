@@ -7,7 +7,7 @@
     tools:context=".main.view.MainActivity">
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/avatar_view"
         android:layout_width="241dp"
         android:layout_height="276dp"
         android:layout_marginTop="28dp"
@@ -17,7 +17,7 @@
         app:srcCompat="@drawable/avatar_image_placeholder" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/username_txt_field"
+        android:id="@+id/register_username_txt_field"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -31,7 +31,7 @@
         app:boxStrokeWidthFocused="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2">
+        app:layout_constraintTop_toBottomOf="@+id/avatar_view">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -40,7 +40,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/password_txt_field"
+        android:id="@+id/register_password_txt_field"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -54,7 +54,7 @@
         app:boxStrokeWidthFocused="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username_txt_field">
+        app:layout_constraintTop_toBottomOf="@+id/register_username_txt_field">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -63,7 +63,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/desc_txt_field"
+        android:id="@+id/register_desc_txt_field"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -77,7 +77,7 @@
         app:boxStrokeWidthFocused="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password_txt_field">
+        app:layout_constraintTop_toBottomOf="@+id/register_password_txt_field">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -86,7 +86,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/sign_in_btn"
+        android:id="@+id/sign_up_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/sign_up"
@@ -94,6 +94,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/desc_txt_field" />
+        app:layout_constraintTop_toBottomOf="@+id/register_desc_txt_field" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
