@@ -27,16 +27,15 @@ object FirebaseWorker {
         return mAuth.currentUser
     }
 
-    fun signUpUser(username: String, password: String, onSuccess: ()->Unit){
+    fun signUpUser(username: String, password: String, onSuccess: (FirebaseWorkerError)->Unit){
 
     }
 
-    fun signInUser(username: String, password: String, onSuccess: ()->Unit){
+    fun signInUser(username: String, password: String, onSuccess: (FirebaseWorkerError)->Unit){
 
     }
 
-    fun addOccupation(occupation: String){
+    fun addOccupation(occupation: String, onSuccess: (FirebaseWorkerError)->Unit){
 
     }
-
 }

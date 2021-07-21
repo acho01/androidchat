@@ -9,12 +9,12 @@ import ge.akikalia.asharashenidze.AndroidChat.register.presenter.RegisterPresent
 import kotlin.math.sign
 
 
-class RegisterActivity : AppCompatActivity(){
+class RegisterActivity : AppCompatActivity(), IRegisterView{
     lateinit var username: TextView
     lateinit var password: TextView
     lateinit var occupation: TextView
 
-    private var presenter = RegisterPresenter()
+    private var presenter = RegisterPresenter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,11 +38,11 @@ class RegisterActivity : AppCompatActivity(){
     }
 
     // maybe create an extension for Activity for loader methods
-    private fun startLoader(){
+    override fun startLoader(){
 //        loader.start()
     }
 
-    private fun stopLoader(error: Boolean){
+    override fun stopLoader(error: Boolean){
 //        loader.stop()
         if (error){
 
