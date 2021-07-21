@@ -3,6 +3,8 @@ package ge.akikalia.asharashenidze.AndroidChat.register.presenter
 import ge.akikalia.asharashenidze.AndroidChat.data.firebase.FirebaseWorker
 import ge.akikalia.asharashenidze.AndroidChat.data.firebase.FirebaseWorkerDelegate
 import ge.akikalia.asharashenidze.AndroidChat.data.firebase.FirebaseWorkerError
+import ge.akikalia.asharashenidze.AndroidChat.main.view.IMainView
+import ge.akikalia.asharashenidze.AndroidChat.register.view.IRegisterView
 
 class RegisterPresenter: FirebaseWorkerDelegate {
 

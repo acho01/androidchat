@@ -29,6 +29,9 @@ class RegisterActivity : AppCompatActivity(){
     }
 
     private fun initViews(){
+        username = findViewById<Button>(R.id.registration_nickname)
+        password = findViewById<Button>(R.id.registration_password)
+        occupation = findViewById<Button>(R.id.registration_occupation)
         findViewById<Button>(R.id.sign_up_btn).setOnClickListener {
             presenter.signUpClicked(username.text as String, password.text as String, occupation.text as String)
         }
