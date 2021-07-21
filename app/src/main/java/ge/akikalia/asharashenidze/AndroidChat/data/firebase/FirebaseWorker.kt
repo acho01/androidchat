@@ -10,12 +10,6 @@ import androidx.annotation.NonNull
 import com.google.android.gms.tasks.OnCompleteListener
 
 
-
-
-
-
-
-
 object FirebaseWorker {
 
     private val mAuth: FirebaseAuth = FirebaseAuth.getInstance()
@@ -23,19 +17,27 @@ object FirebaseWorker {
     var delegate: FirebaseWorkerDelegate? = null
 
 
-    fun getUser(): FirebaseUser?{
+    fun getUser(): FirebaseUser? {
         return mAuth.currentUser
     }
 
-    fun signUpUser(username: String, password: String, onSuccess: (FirebaseWorkerError)->Unit){
+    fun signUpUser(username: String, password: String, onSuccess: (FirebaseWorkerError)->Unit) {
+        mAuth.createUserWithEmailAndPassword(username, password)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val firebaseuser: FirebaseUser = task.result!!.user!!
+                    onSuccess(FirebaseWorkerError.SUCCESS)
+                } else {
+                    onSuccess(FirebaseWorkerError.FAILURE)
+                }
+            }
+    }
+
+    fun signInUser(username: String, password: String, onSuccess: (FirebaseWorkerError) -> Unit) {
 
     }
 
-    fun signInUser(username: String, password: String, onSuccess: (FirebaseWorkerError)->Unit){
-
-    }
-
-    fun addOccupation(occupation: String, onSuccess: (FirebaseWorkerError)->Unit){
+    fun addOccupation(occupation: String, onSuccess: (FirebaseWorkerError) -> Unit) {
 
     }
 }
