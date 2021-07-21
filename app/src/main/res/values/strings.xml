@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">AndroidChat</string>
-    <string name="username_placeholder">username</string>
-    <string name="password_placeholder">password</string>
+    <string name="username_placeholder">Enter your nickname</string>
+    <string name="password_placeholder">Enter your password</string>
+    <string name="desc_placeholder">What I do</string>
+    <string name="not_registered">Not Registered?</string>
+    <string name="sign_up">SIGN UP</string>
+    <string name="sign_in">SIGN IN</string>
 
 </resources>
