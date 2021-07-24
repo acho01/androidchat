@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidChat">
         <activity
-            android:name=".login.view.LoginActivity"
+            android:name="ge.akikalia.asharashenidze.AndroidChat.screens.login.view.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

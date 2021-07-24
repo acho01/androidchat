@@ -1,4 +1,4 @@
-package ge.akikalia.asharashenidze.AndroidChat.register.view
+package ge.akikalia.asharashenidze.AndroidChat.screens.login.view
 
 import android.os.Bundle
 import android.text.TextUtils
@@ -7,19 +7,18 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputLayout
 import ge.akikalia.asharashenidze.AndroidChat.R
-import ge.akikalia.asharashenidze.AndroidChat.register.presenter.RegisterPresenter
+import ge.akikalia.asharashenidze.AndroidChat.screens.login.presenter.LoginPresenter
 
 
-class RegisterActivity : AppCompatActivity(),IRegisterView {
+class LoginActivity : AppCompatActivity(), ILoginView {
     lateinit var usernameItem: TextInputLayout
     lateinit var passwordItem: TextInputLayout
-    lateinit var occupationItem: TextInputLayout
 
-    private var presenter = RegisterPresenter(this)
+    private var presenter = LoginPresenter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
+        setContentView(R.layout.activity_login)
         presenter.onCreate()
         initViews()
     }
@@ -30,10 +29,9 @@ class RegisterActivity : AppCompatActivity(),IRegisterView {
     }
 
     private fun initViews() {
-        usernameItem = findViewById<TextInputLayout>(R.id.register_username_txt_field)
-        passwordItem = findViewById<TextInputLayout>(R.id.register_password_txt_field)
-        occupationItem = findViewById<TextInputLayout>(R.id.register_desc_txt_field)
-        findViewById<Button>(R.id.sign_up_btn).setOnClickListener {
+        usernameItem = findViewById<TextInputLayout>(R.id.login_username_txt_field)
+        passwordItem = findViewById<TextInputLayout>(R.id.login_password_txt_field)
+        findViewById<Button>(R.id.login_sign_in_btn).setOnClickListener {
             when {
                 TextUtils.isEmpty(usernameItem.editText?.text.toString().trim { it <= ' ' }) -> {
                     Toast.makeText(
@@ -51,22 +49,13 @@ class RegisterActivity : AppCompatActivity(),IRegisterView {
                     ).show()
                 }
 
-                TextUtils.isEmpty(occupationItem.editText?.text.toString().trim { it <= ' ' }) -> {
-                    Toast.makeText(
-                        this,
-                        "Please enter what you do",
-                        Toast.LENGTH_LONG
-                    ).show()
-                }
                 else -> {
                     val username = usernameItem.editText?.text.toString().trim { it <= ' ' }
                     val password = passwordItem.editText?.text.toString().trim { it <= ' ' }
-                    val occupation = occupationItem.editText?.text.toString().trim { it <= ' ' }
 
-                    presenter.signUpClicked(
+                    presenter.signInClicked(
                         username as String,
                         password as String,
-                        occupation as String
                     )
 
                 }
@@ -86,5 +75,4 @@ class RegisterActivity : AppCompatActivity(),IRegisterView {
 
         }
     }
-
 }

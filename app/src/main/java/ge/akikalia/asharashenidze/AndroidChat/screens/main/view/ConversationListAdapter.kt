@@ -1,4 +1,4 @@
-package ge.akikalia.asharashenidze.AndroidChat.main.view
+package ge.akikalia.asharashenidze.AndroidChat.screens.main.view
 
 import android.view.LayoutInflater
 import android.view.View

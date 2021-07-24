@@ -1,10 +1,10 @@
-package ge.akikalia.asharashenidze.AndroidChat.register.presenter
+package ge.akikalia.asharashenidze.AndroidChat.screens.register.presenter
 
 import android.util.Log
 import ge.akikalia.asharashenidze.AndroidChat.data.firebase.auth.FirebaseAuthWorker
 import ge.akikalia.asharashenidze.AndroidChat.data.firebase.auth.FirebaseAuthWorkerDelegate
 import ge.akikalia.asharashenidze.AndroidChat.data.firebase.auth.FirebaseAuthWorkerError
-import ge.akikalia.asharashenidze.AndroidChat.register.view.IRegisterView
+import ge.akikalia.asharashenidze.AndroidChat.screens.register.view.IRegisterView
 
 class RegisterPresenter(view: IRegisterView): FirebaseAuthWorkerDelegate {
 

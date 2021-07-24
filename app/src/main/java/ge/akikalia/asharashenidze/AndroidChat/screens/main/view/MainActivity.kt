@@ -1,4 +1,4 @@
-package ge.akikalia.asharashenidze.AndroidChat.main.view
+package ge.akikalia.asharashenidze.AndroidChat.screens.main.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

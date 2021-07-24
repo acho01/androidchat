@@ -1,4 +1,4 @@
-package ge.akikalia.asharashenidze.AndroidChat.register.view
+package ge.akikalia.asharashenidze.AndroidChat.screens.register.view
 
 import ge.akikalia.asharashenidze.AndroidChat.common.ILoaderView
 
