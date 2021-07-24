@@ -27,5 +27,18 @@ object FirebaseAuthWorker {
     }
 
     fun signInUser(username: String, password: String, onSuccess: (FirebaseAuthWorkerError) -> Unit) {
+        mAuth.signInWithEmailAndPassword(username, password)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val firebaseuser: FirebaseUser = task.result!!.user!!
+                    onSuccess(FirebaseAuthWorkerError.SUCCESS)
+                } else {
+                    onSuccess(FirebaseAuthWorkerError.FAILURE)
+                }
+            }
+    }
+
+    fun addOccupation(occupation: String, onSuccess: (FirebaseAuthWorkerError) -> Unit) {
+
     }
 }

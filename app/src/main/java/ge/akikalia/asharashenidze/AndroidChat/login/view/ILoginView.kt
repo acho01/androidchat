@@ -1,5 +1,7 @@
 package ge.akikalia.asharashenidze.AndroidChat.login.view
 
-interface ILoginView {
+import ge.akikalia.asharashenidze.AndroidChat.common.ILoaderView
+
+interface ILoginView: ILoaderView {
 
 }
