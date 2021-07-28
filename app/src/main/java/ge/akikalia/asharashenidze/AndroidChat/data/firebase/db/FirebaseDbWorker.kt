@@ -11,6 +11,7 @@ import com.google.firebase.ktx.Firebase
 import ge.akikalia.asharashenidze.AndroidChat.data.firebase.auth.FirebaseAuthWorker
 import ge.akikalia.asharashenidze.AndroidChat.data.firebase.auth.FirebaseAuthWorkerDelegate
 import ge.akikalia.asharashenidze.AndroidChat.data.firebase.auth.FirebaseAuthWorkerError
+import ge.akikalia.asharashenidze.AndroidChat.model.User
 
 object FirebaseDbWorker {
     val database = Firebase.database
@@ -34,6 +35,10 @@ object FirebaseDbWorker {
             }
 
         })
+    }
+
+    fun loadLoggedUser(onSuccess: (FirebaseDbWorkerError, User)->Unit) {
+        onSuccess(FirebaseDbWorkerError.SUCCESS, User("jdilla", "MC"))
     }
 
     fun addOccupation(occupation: String, onSuccess: (FirebaseDbWorkerError) -> Unit) {
