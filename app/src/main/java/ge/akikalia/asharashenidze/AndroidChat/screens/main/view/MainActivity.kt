@@ -6,15 +6,19 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ge.akikalia.asharashenidze.AndroidChat.R
 import ge.akikalia.asharashenidze.AndroidChat.model.Conversation
+import ge.akikalia.asharashenidze.AndroidChat.screens.main.presenter.MainPresenter
 
 class MainActivity : AppCompatActivity() {
     private lateinit var conversationListRecyclerView: RecyclerView
     private val conversationListAdapter = ConversationListAdapter()
 
+    val presenter = MainPresenter()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initViews()
+
         updateList(listOf(Conversation("Jon Doe", "", ""),
                             Conversation("Jane Doe", "", ""),
                             Conversation("John Doe", "", ""),
