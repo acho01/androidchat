@@ -10,6 +10,7 @@ import com.google.firebase.database.ValueEventListener
 import ge.akikalia.asharashenidze.AndroidChat.data.firebase.auth.FirebaseAuthWorker
 import ge.akikalia.asharashenidze.AndroidChat.data.firebase.auth.FirebaseAuthWorkerDelegate
 import ge.akikalia.asharashenidze.AndroidChat.data.firebase.auth.FirebaseAuthWorkerError
+import ge.akikalia.asharashenidze.AndroidChat.model.User
 
 object FirebaseDbWorker {
     val database = FirebaseDatabase.getInstance()
@@ -40,6 +41,7 @@ object FirebaseDbWorker {
 
         })
     }
+
     fun setValue(){
         myRef.setValue("prarabi")
     }
@@ -58,8 +60,11 @@ object FirebaseDbWorker {
         })
     }
 
+    fun loadLoggedUser(onSuccess: (FirebaseDbWorkerError, User)->Unit) {
+        onSuccess(FirebaseDbWorkerError.SUCCESS, User("jdilla", "MC"))
+    }
+
     fun addOccupation(occupation: String, onSuccess: (FirebaseDbWorkerError) -> Unit) {
         myRef.setValue("Hello, World!")
     }
-
 }
