@@ -5,10 +5,16 @@
       <map>
         <entry key="app/src/main/res/drawable/background.xml" value="0.34375" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.34375" />
+        <entry key="app/src/main/res/layout/activity_add_conversation.xml" value="0.21927083333333333" />
+        <entry key="app/src/main/res/layout/activity_chat.xml" value="0.21875" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.18659420289855072" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.17916666666666667" />
+        <entry key="app/src/main/res/layout/add_conversation_list_item.xml" value="0.21927083333333333" />
+        <entry key="app/src/main/res/layout/chat_list_item.xml" value="0.21927083333333333" />
+        <entry key="app/src/main/res/layout/chat_list_item_right.xml" value="0.31657608695652173" />
         <entry key="app/src/main/res/layout/conversation_list_item.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/main_list_item.xml" value="0.21927083333333333" />
         <entry key="app/src/main/res/menu/app_bar_menu.xml" value="0.32760416666666664" />
       </map>
     </option>

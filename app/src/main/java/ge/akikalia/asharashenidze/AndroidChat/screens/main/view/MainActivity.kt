@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun initViews(){
-        conversationListRecyclerView = findViewById(R.id.conversationList)
+        conversationListRecyclerView = findViewById(R.id.main_conversation_list)
         conversationListRecyclerView.layoutManager = LinearLayoutManager(this)
         conversationListRecyclerView.adapter = conversationListAdapter
     }

@@ -1,4 +1,4 @@
-package ge.akikalia.asharashenidze.AndroidChat.screens.main.view
+package ge.akikalia.asharashenidze.AndroidChat.screens.addConversation.view
 
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +14,7 @@ class ConversationListAdapter(): RecyclerView.Adapter<ConversationListAdapter.Co
     var list = listOf<Conversation>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ConversationViewHolder {
-        return ConversationViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.main_list_item,parent, false))
+        return ConversationViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.add_conversation_list_item, parent, false))
     }
 
     override fun onBindViewHolder(holder: ConversationViewHolder, position: Int) {
@@ -25,7 +25,6 @@ class ConversationListAdapter(): RecyclerView.Adapter<ConversationListAdapter.Co
     override fun getItemCount(): Int {
         return list.size
     }
-
 
     inner class ConversationViewHolder(view: View): RecyclerView.ViewHolder(view){
 

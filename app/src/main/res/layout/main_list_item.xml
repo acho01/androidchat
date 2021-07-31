@@ -6,17 +6,17 @@
     android:layout_height="100dp">
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/conversationListItemName"
+        android:id="@+id/main_list_item_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:text="@string/user_name_placeholder"
-        app:layout_constraintBottom_toTopOf="@+id/conversationListItemSummary"
-        app:layout_constraintStart_toEndOf="@+id/imageView4"
+        app:layout_constraintBottom_toTopOf="@+id/main_list_item_summary"
+        app:layout_constraintStart_toEndOf="@+id/main_list_item_image"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/conversationListItemTimePassed"
+        android:id="@+id/main_list_item_time_passed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -26,16 +26,16 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/conversationListItemSummary"
+        android:id="@+id/main_list_item_summary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/conversation_summary_placeholder"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/conversationListItemName"
-        app:layout_constraintTop_toBottomOf="@+id/conversationListItemName" />
+        app:layout_constraintStart_toStartOf="@+id/main_list_item_name"
+        app:layout_constraintTop_toBottomOf="@+id/main_list_item_name" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/main_list_item_image"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginStart="16dp"

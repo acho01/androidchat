@@ -15,30 +15,50 @@ import ge.akikalia.asharashenidze.AndroidChat.data.firebase.auth.FirebaseAuthWor
 object FirebaseDbWorker {
     val database = Firebase.database
 
-    val myRef = database.getReference("message")
+    val myRef = database.getReference("users")
 
     var delegate: FirebaseDbWorkerDelegate? = null
 
-    init {
+    fun getData(){
+        Log.d("stdout", "get data called")
         myRef.addValueEventListener(object: ValueEventListener {
-
             override fun onDataChange(snapshot: DataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
                 val value = snapshot.getValue<String>()
                 Log.d("stdout", "Value is: " + value)
             }
-
             override fun onCancelled(error: DatabaseError) {
+                println("Failed to read value.")
                 Log.w("stdout", "Failed to read value.", error.toException())
             }
-
         })
     }
 
-    fun addOccupation(occupation: String, onSuccess: (FirebaseDbWorkerError) -> Unit) {
-        myRef.setValue("Hello, World!")
+    fun getDatatwo(){
 
+        myRef.setValue("get data called")
+        myRef.child("acho").get().addOnSuccessListener {
+
+            if (it.exists()){
+                println("GOOOOOD")
+
+            }else{
+                println("iioooo")
+            }
+
+        }.addOnFailureListener{
+            println("ERRORRRR")
+        }
+        println("jjijijij")
+    }
+
+    fun setData(){
+//        myRef.setValue("Hello, World!")
+    }
+
+    fun addOccupation(occupation: String, onSuccess: (FirebaseDbWorkerError) -> Unit) {
+        myRef.setValue(null)
     }
 
 }

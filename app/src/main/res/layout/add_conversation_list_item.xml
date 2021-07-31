@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="100dp">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/add_conversation_list_item_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:text="@string/user_name_placeholder"
+        app:layout_constraintBottom_toTopOf="@+id/add_conversation_list_item_occupation"
+        app:layout_constraintStart_toEndOf="@+id/add_conversation_list_item_image"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/add_conversation_list_item_occupation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/occupation_placeholder"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/add_conversation_list_item_name"
+        app:layout_constraintTop_toBottomOf="@+id/add_conversation_list_item_name" />
+
+    <ImageView
+        android:id="@+id/add_conversation_list_item_image"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="32dp"
+        android:contentDescription="@string/avatar_placeholder"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/avatar_image_placeholder" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

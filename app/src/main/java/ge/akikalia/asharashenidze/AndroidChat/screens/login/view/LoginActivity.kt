@@ -7,6 +7,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputLayout
 import ge.akikalia.asharashenidze.AndroidChat.R
+import ge.akikalia.asharashenidze.AndroidChat.common.ILoaderView
+import ge.akikalia.asharashenidze.AndroidChat.data.firebase.auth.FirebaseAuthWorker
+import ge.akikalia.asharashenidze.AndroidChat.data.firebase.db.FirebaseDbWorker
 import ge.akikalia.asharashenidze.AndroidChat.screens.login.presenter.LoginPresenter
 
 
@@ -29,6 +32,10 @@ class LoginActivity : AppCompatActivity(), ILoginView {
     }
 
     private fun initViews() {
+        FirebaseDbWorker.getData()
+        FirebaseDbWorker.setData()
+
+
         usernameItem = findViewById<TextInputLayout>(R.id.login_username_txt_field)
         passwordItem = findViewById<TextInputLayout>(R.id.login_password_txt_field)
         findViewById<Button>(R.id.login_sign_in_btn).setOnClickListener {

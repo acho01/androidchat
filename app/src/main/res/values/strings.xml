@@ -11,4 +11,5 @@
     <string name="timestamp_placeholder">1 min</string>
     <string name="avatar_placeholder">avatar</string>
     <string name="search_placeholder">Search</string>
+    <string name="occupation_placeholder">Manager</string>
 </resources>
