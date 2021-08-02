@@ -28,7 +28,7 @@ object FirebaseDbWorker {
                 // whenever data at this location is updated.
                 val value = snapshot.getValue(String::class.java)
                 Log.d("stdout", "Value is: " + value)
-                setValue()
+//                setValue()
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -64,6 +64,19 @@ object FirebaseDbWorker {
             onSuccess(FirebaseDbWorkerError.FAILURE, null)
             Log.e("firebase", "Error getting data", it)
         }
+    }
+
+    fun updateLoggedUser(updatedUser: User, onSuccess: (FirebaseDbWorkerError, User?) -> Unit) {
+            myRef.get().addOnSuccessListener {
+                val loadedUser = UserUtils.getUser(it)
+                val updateDbUser = UserUtils.updateDbUser(myRef,loadedUser, updatedUser)
+//                myRef.child("username").setValue("OOOOOOO")
+                onSuccess(FirebaseDbWorkerError.SUCCESS, updateDbUser)
+                Log.i("firebase", "User updated successfully ${updateDbUser}")
+            }.addOnFailureListener {
+                onSuccess(FirebaseDbWorkerError.FAILURE, null)
+                Log.i("firebase", "User update Failed ${updatedUser.username}")
+            }
     }
 
     fun addOccupation(occupation: String, onSuccess: (FirebaseDbWorkerError) -> Unit) {
