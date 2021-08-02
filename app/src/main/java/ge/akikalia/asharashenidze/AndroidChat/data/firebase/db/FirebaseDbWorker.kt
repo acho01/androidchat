@@ -1,21 +1,17 @@
 package ge.akikalia.asharashenidze.AndroidChat.data.firebase.db
 
-import android.renderscript.Sampler
 import android.util.Log
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import ge.akikalia.asharashenidze.AndroidChat.data.firebase.auth.FirebaseAuthWorker
-import ge.akikalia.asharashenidze.AndroidChat.data.firebase.auth.FirebaseAuthWorkerDelegate
-import ge.akikalia.asharashenidze.AndroidChat.data.firebase.auth.FirebaseAuthWorkerError
+import ge.akikalia.asharashenidze.AndroidChat.common.UserUtils
 import ge.akikalia.asharashenidze.AndroidChat.model.User
 
 object FirebaseDbWorker {
     val database = FirebaseDatabase.getInstance()
 
-    val myRef = database.getReference("Users").child("acho").child("occupation")
+    val myRef = database.getReference("Users").child("acho")
 
     var delegate: FirebaseDbWorkerDelegate? = null
 
@@ -60,8 +56,14 @@ object FirebaseDbWorker {
         })
     }
 
-    fun loadLoggedUser(onSuccess: (FirebaseDbWorkerError, User)->Unit) {
-        onSuccess(FirebaseDbWorkerError.SUCCESS, User("jdilla", "MC"))
+    fun loadLoggedUser(onSuccess: (FirebaseDbWorkerError, User?) -> Unit) {
+        myRef.get().addOnSuccessListener {
+            onSuccess(FirebaseDbWorkerError.SUCCESS, UserUtils.getUser(it))
+            Log.i("firebase", "Got value ${it.value}")
+        }.addOnFailureListener {
+            onSuccess(FirebaseDbWorkerError.FAILURE, null)
+            Log.e("firebase", "Error getting data", it)
+        }
     }
 
     fun addOccupation(occupation: String, onSuccess: (FirebaseDbWorkerError) -> Unit) {

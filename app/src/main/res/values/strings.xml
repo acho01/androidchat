@@ -7,6 +7,7 @@
     <string name="sign_up">SIGN UP</string>
     <string name="sign_in">SIGN IN</string>
     <string name="sign_out">SIGN OUT</string>
+    <string name="update">UPDATE</string>
     <string name="user_name_placeholder">Jon Doe</string>
     <string name="conversation_summary_placeholder">Hello Jane Doe!</string>
     <string name="timestamp_placeholder">1 min</string>

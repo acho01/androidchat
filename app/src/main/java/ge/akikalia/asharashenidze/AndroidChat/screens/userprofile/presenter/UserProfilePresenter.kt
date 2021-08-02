@@ -21,11 +21,15 @@ class UserProfilePresenter(var view: IUserProfileView?) : FirebaseDbWorkerDelega
 
     fun loadLoggedUserProfile() {
         view?.startLoader()
-        Log.i("stdout", "loading logged user.")
+        Log.i("stdout", "loading logged user...")
         FirebaseDbWorker.loadLoggedUser { status, user ->
             if (status == FirebaseDbWorkerError.SUCCESS){
                 Log.i("stdout", "Logged User loaded successfully")
-                view?.displayUserProfile(user.username, user.occupation)
+                if (user != null) {
+                    view?.displayUserProfile(user.username, user.occupation)
+                } else {
+                    Log.i("stdout", "Logged User load failed!")
+                }
             }else{
                 Log.i("stdout", "Logged User load failed!")
             }
