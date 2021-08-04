@@ -3,6 +3,7 @@ package ge.akikalia.asharashenidze.AndroidChat.common
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseReference
 import ge.akikalia.asharashenidze.AndroidChat.model.User
+import ge.akikalia.asharashenidze.AndroidChat.model.UserChat
 
 object UserUtils {
 
