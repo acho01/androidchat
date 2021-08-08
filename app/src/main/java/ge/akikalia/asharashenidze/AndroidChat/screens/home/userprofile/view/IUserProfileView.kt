@@ -1,4 +1,4 @@
-package ge.akikalia.asharashenidze.AndroidChat.screens.userprofile.view
+package ge.akikalia.asharashenidze.AndroidChat.screens.home.userprofile.view
 
 import android.content.Context
 import ge.akikalia.asharashenidze.AndroidChat.common.ILoaderView
