@@ -26,7 +26,6 @@ object UserUtils {
     @JvmStatic
     fun updateDbUser(userRef: DatabaseReference, loadedUser: User, updatedUser: User): User {
         val oldUsername = loadedUser.username
-        val oldPassword = loadedUser.password
         val oldOccupation = loadedUser.occupation
 
         val newUsername = updatedUser.username
@@ -42,7 +41,6 @@ object UserUtils {
 
         return User(
             newUsername,
-            oldPassword,
             newOccupation
         )
     }

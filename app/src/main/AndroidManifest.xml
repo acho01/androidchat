@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidChat">
         <activity
-            android:name="ge.akikalia.asharashenidze.AndroidChat.screens.main.view.MainActivity"
+            android:name="ge.akikalia.asharashenidze.AndroidChat.screens.add.view.AddActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

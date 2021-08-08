@@ -31,9 +31,12 @@ class ConversationListAdapter(): RecyclerView.Adapter<ConversationListAdapter.Co
 
         fun bindPacket(conversation: Conversation) {
             name.text = conversation.name
+            summary.text = conversation.preview
+            time.text = conversation.time
         }
 
         private val name = view.findViewById<TextView>(R.id.conversationListItemName)
-
+        private val summary = view.findViewById<TextView>(R.id.conversationListItemSummary)
+        private val time = view.findViewById<TextView>(R.id.conversationListItemTimePassed)
     }
 }
