@@ -1,16 +1,14 @@
-package ge.akikalia.asharashenidze.AndroidChat.screens.userprofile.presenter
+package ge.akikalia.asharashenidze.AndroidChat.screens.home.userprofile.presenter
 
 import android.util.Log
-import android.widget.Toast
 import ge.akikalia.asharashenidze.AndroidChat.common.Action
 import ge.akikalia.asharashenidze.AndroidChat.common.ToastUtils
 import ge.akikalia.asharashenidze.AndroidChat.data.firebase.auth.FirebaseAuthWorker
-import ge.akikalia.asharashenidze.AndroidChat.data.firebase.auth.FirebaseAuthWorkerError
 import ge.akikalia.asharashenidze.AndroidChat.data.firebase.db.FirebaseDbWorker
 import ge.akikalia.asharashenidze.AndroidChat.data.firebase.db.FirebaseDbWorkerDelegate
 import ge.akikalia.asharashenidze.AndroidChat.data.firebase.db.FirebaseDbWorkerError
 import ge.akikalia.asharashenidze.AndroidChat.model.User
-import ge.akikalia.asharashenidze.AndroidChat.screens.userprofile.view.IUserProfileView
+import ge.akikalia.asharashenidze.AndroidChat.screens.home.userprofile.view.IUserProfileView
 
 class UserProfilePresenter(var view: IUserProfileView?) : FirebaseDbWorkerDelegate {
 
