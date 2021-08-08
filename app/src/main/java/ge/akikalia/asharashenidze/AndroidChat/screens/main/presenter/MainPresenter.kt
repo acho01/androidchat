@@ -5,6 +5,6 @@ import ge.akikalia.asharashenidze.AndroidChat.data.firebase.db.FirebaseDbWorker
 class MainPresenter: IMainPresenter {
 
     constructor(){
-        FirebaseDbWorker.setListener()
+//        FirebaseDbWorker.setListener()
     }
 }

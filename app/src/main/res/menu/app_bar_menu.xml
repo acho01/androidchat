@@ -2,15 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:title="first action"
-        android:icon="@mipmap/ic_launcher"
-        app:showAsAction="ifRoom"
-        app:iconTint="@color/black"/>
+        android:icon="@drawable/house"
+        android:title=""
+        app:iconTint="@color/black"
+        app:showAsAction="ifRoom" />
 
 
     <item
-        android:title="second action"
-        android:icon="@mipmap/ic_launcher"
-        app:showAsAction="ifRoom"
-        app:iconTint="@color/black"/>
+        android:icon="@drawable/gear"
+        android:title=""
+        app:iconTint="@color/black"
+        app:showAsAction="ifRoom" />
 </menu>
