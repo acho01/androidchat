@@ -9,7 +9,6 @@ object FirebaseAuthWorker {
 
     var delegate: FirebaseAuthWorkerDelegate? = null
 
-
     fun getUser(): FirebaseUser? {
         return mAuth.currentUser
     }

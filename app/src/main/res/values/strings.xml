@@ -10,6 +10,7 @@
     <string name="update">UPDATE</string>
     <string name="user_name_placeholder">Jon Doe</string>
     <string name="conversation_summary_placeholder">Hello Jane Doe!</string>
+    <string name="user_occupation_placeholder">Manager</string>
     <string name="timestamp_placeholder">1 min</string>
     <string name="avatar_placeholder">avatar</string>
     <string name="search_placeholder">Search</string>

@@ -7,6 +7,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import ge.akikalia.asharashenidze.AndroidChat.common.UserChatUtils
 import ge.akikalia.asharashenidze.AndroidChat.common.UserUtils
+import ge.akikalia.asharashenidze.AndroidChat.data.firebase.auth.FirebaseAuthWorker
 import ge.akikalia.asharashenidze.AndroidChat.model.User
 import ge.akikalia.asharashenidze.AndroidChat.model.UserChat
 
@@ -17,36 +18,69 @@ object FirebaseDbWorker {
 
     val myRefUsers = database.getReference("Users")
 
-    val myRefChats = database.getReference("Chats")
+    val chatListRef = database.getReference("UserChats")
+
+    val userListRef = database.getReference("Users")
 
     val myRefUserChats = database.getReference("UserChats")
 
     var delegate: FirebaseDbWorkerDelegate? = null
 
-    init {
-
-    }
-
-    fun setListener(){
+    fun listenForChatListChanges(userId: String, onComplete: (FirebaseDbWorkerError, List<UserChat>?) -> Unit){
         Log.i("stdout", "initialized")
-        myRef.addValueEventListener(object: ValueEventListener {
-
+        chatListRef.child(userId).addValueEventListener(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                val value = snapshot.getValue(String::class.java)
-                Log.d("stdout", "Value is: " + value)
-//                setValue()
+                val values = snapshot.children.map { child ->
+                    var chat = child.getValue(UserChat::class.java)!!
+                    chat.chatId = child.key
+                    chat
+                }
+                onComplete(FirebaseDbWorkerError.SUCCESS, values)
+                Log.d("stdout", "Value is: " + values)
             }
 
             override fun onCancelled(error: DatabaseError) {
                 Log.w("stdout", "Failed to read value.", error.toException())
+                onComplete(FirebaseDbWorkerError.FAILURE, null)
             }
-
         })
     }
 
-    fun setValue(){
+    fun getUserList(userId: String, onComplete: (FirebaseDbWorkerError, List<User>?) -> Unit){
+        Log.i("stdout", "initialized")
+        userListRef.child(userId).addListenerForSingleValueEvent(object: ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                val values = snapshot.children.map { child ->
+                    var user = child.getValue(User::class.java)!!
+                    user.userId = child.key
+                    user.username = user.username
+                    user.occupation = user.occupation
+                    user
+                }
+                onComplete(FirebaseDbWorkerError.SUCCESS, values)
+                Log.d("stdout", "Value is: " + values)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.w("stdout", "Failed to read value.", error.toException())
+                onComplete(FirebaseDbWorkerError.FAILURE, null)
+            }
+        })
+    }
+
+    fun getUserList(){
+
+    }
+
+    fun createConversation(){
+
+    }
+
+    fun addChat(){
         myRef.setValue("prarabi")
     }
 
@@ -82,7 +116,7 @@ object FirebaseDbWorker {
                 Log.i("firebase", "User updated successfully ${updateDbUser}")
             }.addOnFailureListener {
                 onSuccess(FirebaseDbWorkerError.FAILURE, null)
-                Log.i("firebase", "User update Failed ${updatedUser.username}")
+                Log.i("firebase", "User update Failed ${updatedUser}")
             }
     }
 
