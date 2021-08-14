@@ -1,9 +1,9 @@
 package ge.akikalia.asharashenidze.AndroidChat.screens.login.presenter
 
 import android.util.Log
-import ge.akikalia.asharashenidze.AndroidChat.data.firebase.auth.FirebaseAuthWorker
-import ge.akikalia.asharashenidze.AndroidChat.data.firebase.auth.FirebaseAuthWorkerDelegate
-import ge.akikalia.asharashenidze.AndroidChat.data.firebase.auth.FirebaseAuthWorkerError
+import ge.akikalia.asharashenidze.AndroidChat.data.firebase.storage.auth.FirebaseAuthWorker
+import ge.akikalia.asharashenidze.AndroidChat.data.firebase.storage.auth.FirebaseAuthWorkerDelegate
+import ge.akikalia.asharashenidze.AndroidChat.data.firebase.storage.auth.FirebaseAuthWorkerError
 import ge.akikalia.asharashenidze.AndroidChat.screens.login.view.ILoginView
 
 class LoginPresenter(view: ILoginView): FirebaseAuthWorkerDelegate {
@@ -24,11 +24,7 @@ class LoginPresenter(view: ILoginView): FirebaseAuthWorkerDelegate {
         view?.startLoader()
         Log.i("stdout", "signing up user")
         FirebaseAuthWorker.signInUser(username, password){ result ->
-            if (result == FirebaseAuthWorkerError.SUCCESS){
-                Log.i("stdout", "sign in completed Successfully")
-            }else{
-                Log.i("stdout", "sign in complete Unsuccessfully")
-            }
+
         }
     }
 }

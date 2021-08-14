@@ -4,24 +4,15 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager2.widget.ViewPager2
-import com.google.android.material.tabs.TabLayout
 import com.google.android.material.textfield.TextInputEditText
+import com.google.firebase.auth.UserInfo
 import ge.akikalia.asharashenidze.AndroidChat.R
-import ge.akikalia.asharashenidze.AndroidChat.model.Conversation
-import ge.akikalia.asharashenidze.AndroidChat.model.User
+import ge.akikalia.asharashenidze.AndroidChat.model.UserData
 import ge.akikalia.asharashenidze.AndroidChat.screens.add.presenter.AddPresenter
-import ge.akikalia.asharashenidze.AndroidChat.screens.add.view.IAddView
-import ge.akikalia.asharashenidze.AndroidChat.screens.add.view.UserListAdapter
-import ge.akikalia.asharashenidze.AndroidChat.screens.main.presenter.MainPresenter
-import ge.akikalia.asharashenidze.AndroidChat.screens.main.view.ConversationListAdapter
-import ge.akikalia.asharashenidze.AndroidChat.screens.main.view.IMainView
-import ge.akikalia.asharashenidze.AndroidChat.screens.main.view.MainChatListFragment
-import ge.akikalia.asharashenidze.AndroidChat.screens.main.view.ProfileFragment
 
 class AddActivity : AppCompatActivity(), IAddView {
     private lateinit var userListRecyclerView: RecyclerView
-    private val userListAdapter = UserListAdapter()
+    private val userListAdapter = UserListAdapter(this)
     private lateinit var searchBar: TextInputEditText
 
     val presenter = AddPresenter(this)
@@ -30,7 +21,7 @@ class AddActivity : AppCompatActivity(), IAddView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add)
         initViews()
-        presenter.search("")
+        presenter.loadData()
     }
 
     fun initViews(){
@@ -40,13 +31,17 @@ class AddActivity : AppCompatActivity(), IAddView {
         userListRecyclerView.adapter = userListAdapter
     }
 
-    override fun updateList(list: List<User>) {
+    override fun updateList(list: List<UserData>) {
         userListAdapter.list = list
         userListAdapter.notifyDataSetChanged()
     }
 
     override fun displayError() {
         TODO("Not yet implemented")
+    }
+
+    override fun addUser(id: String) {
+        presenter.addUser(id)
     }
 
 }

@@ -6,32 +6,35 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ge.akikalia.asharashenidze.AndroidChat.R
-import ge.akikalia.asharashenidze.AndroidChat.model.Conversation
-import ge.akikalia.asharashenidze.AndroidChat.model.User
+import ge.akikalia.asharashenidze.AndroidChat.model.UserData
 
-class UserListAdapter(): RecyclerView.Adapter<UserListAdapter.UserViewHolder>() {
+class UserListAdapter(private val addView: IAddView): RecyclerView.Adapter<UserListAdapter.UserViewHolder>() {
 
-    var list = listOf<User>()
+    var list = listOf<UserData>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         return UserViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.user_list_item,parent, false))
     }
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
-        val packet = list[position]
-        holder.bindPacket(packet)
+        val userData = list[position]
+        holder.itemView.setOnClickListener {view ->
+            userData.id.let{ id ->
+                addView.addUser(id)
+            }
+        }
+        holder.bindUserData(userData)
     }
 
     override fun getItemCount(): Int {
         return list.size
     }
 
-
     inner class UserViewHolder(view: View): RecyclerView.ViewHolder(view){
 
-        fun bindPacket(User: User) {
-            name.text = User.username
-            occupation.text = User.occupation
+        fun bindUserData(user: UserData) {
+            name.text = user.username
+            occupation.text = user.occupation
         }
 
         private val name = view.findViewById<TextView>(R.id.userListItemName)
