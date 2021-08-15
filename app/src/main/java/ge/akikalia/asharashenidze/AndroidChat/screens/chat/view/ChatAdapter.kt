@@ -9,15 +9,17 @@ import androidx.recyclerview.widget.RecyclerView
 import ge.akikalia.asharashenidze.AndroidChat.screens.chat.view.dto.MessageDto
 
 
-class ChatAdapter(var context: Context, var messageDtoList: List<MessageDto>) :
+class ChatAdapter(var context: Context) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    var messageDtoList: List<MessageDto> = arrayListOf()
+
     private val VIEW_TYPE_MESSAGE_SENT = 1
     private val VIEW_TYPE_MESSAGE_RECEIVED = 2
 
     override fun getItemViewType(position: Int): Int {
         val messageDto: MessageDto = messageDtoList.get(position)
         //TODO[A.SH] refactor it to logged in user
-        return if (messageDto.sender.nickname.equals("acho01")) {
+        return if (messageDto.isSelf) {
             VIEW_TYPE_MESSAGE_SENT
         } else {
             VIEW_TYPE_MESSAGE_RECEIVED
@@ -66,13 +68,10 @@ class ChatAdapter(var context: Context, var messageDtoList: List<MessageDto>) :
             view.findViewById<TextView>(ge.akikalia.asharashenidze.AndroidChat.R.id.text_chat_message_other)
         var timeText =
             view.findViewById<TextView>(ge.akikalia.asharashenidze.AndroidChat.R.id.text_chat_time_other)
-        var nameText =
-            view.findViewById<TextView>(ge.akikalia.asharashenidze.AndroidChat.R.id.text_chat_user_other)
 
         fun bind(messageDto: MessageDto) {
             messageText.text = messageDto.message
             timeText.text = messageDto.time.toString()
-            nameText.text = messageDto.sender.nickname
         }
     }
 

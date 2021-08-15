@@ -135,7 +135,7 @@ object FirebaseDbWorker {
     fun getUserInfo(userId: String, onComplete: (FirebaseUserInfo?) -> Unit) {
         usersRef.child(userId).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                val user = snapshot.value as FirebaseUserInfo?
+                val user = snapshot.getValue(FirebaseUserInfo::class.java)
                 onComplete(user)
             }
 
@@ -178,7 +178,8 @@ object FirebaseDbWorker {
         userChatsRef.child(user.id).setValue(null)//(ArrayList<FirebaseUserChat>())
     }
 
-    fun updateUserOccupation(userId: String, occupation: String) {
+    fun updateUserProfile(userId: String, occupation: String, username: String) {
         usersRef.child(userId).child("occupation").setValue(occupation)
+        usersRef.child(userId).child("username").setValue(username)
     }
 }

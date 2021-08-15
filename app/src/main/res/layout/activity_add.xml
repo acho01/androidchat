@@ -36,12 +36,14 @@ android:fitsSystemWindows="true">
             android:layout_gravity="bottom"
             app:layout_collapseMode="pin">
 
-            <ImageView
-                android:id="@+id/imageView"
+            <ImageButton
+                android:id="@+id/back_button"
                 android:layout_width="40dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="3dp"
                 android:layout_marginRight="3dp"
+                android:backgroundTint="#00FFFFFF"
+                android:scaleType="fitCenter"
                 app:srcCompat="@drawable/back_arrow" />
 
             <com.google.android.material.textfield.TextInputLayout

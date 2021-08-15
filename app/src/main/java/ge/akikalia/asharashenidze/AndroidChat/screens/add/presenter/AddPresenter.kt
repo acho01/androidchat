@@ -1,17 +1,23 @@
 package ge.akikalia.asharashenidze.AndroidChat.screens.add.presenter
 
-import android.util.Log
 import ge.akikalia.asharashenidze.AndroidChat.data.firebase.storage.ChatStorage
 import ge.akikalia.asharashenidze.AndroidChat.model.UserData
 import ge.akikalia.asharashenidze.AndroidChat.screens.add.view.IAddView
-import kotlin.concurrent.thread
 
-class AddPresenter(private val view: IAddView) : IAddPresenter {
+class AddPresenter(private val view: IAddView){
 
     var userList: List<UserData>? = null
 
-    fun loadData() {
-
+    fun onViewLoad() {
+        view.startLoader()
+        ChatStorage.getUserList { list->
+            view.stopLoader(list == null)
+            if (list != null) {
+                view.updateList(list)
+            }
+        }
+    }
+//        ChatStorage.signOut()
 
 //        ChatStorage.startListeningToChat("68702e4d-8c77-4267-85ad-d67d1c2c6f5f") { list ->
 //            Log.i("stdout", "listing Chat Messages: ")
@@ -65,7 +71,7 @@ class AddPresenter(private val view: IAddView) : IAddPresenter {
 //        ChatStorage.signUp("giorgi giorgadze", "giorgiPassword", "laziness expert"){
 //            Log.i("stdout", "sign up callback result: $it")
 //        }
-    }
+//    }
 
 //    fun loadData() {
 //        ChatStorage.getUserList { list ->
@@ -84,5 +90,6 @@ class AddPresenter(private val view: IAddView) : IAddPresenter {
 
     fun addUser(id: String) {
         ChatStorage.createChatWithUser(id)
+        view.closeView()
     }
 }

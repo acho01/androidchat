@@ -1,5 +1,6 @@
 package ge.akikalia.asharashenidze.AndroidChat.data.firebase.storage
 
+import android.util.Log
 import ge.akikalia.asharashenidze.AndroidChat.common.UsernameUtils
 import ge.akikalia.asharashenidze.AndroidChat.data.firebase.storage.auth.FirebaseAuthWorker
 import ge.akikalia.asharashenidze.AndroidChat.data.firebase.storage.db.FirebaseDbWorker
@@ -14,14 +15,18 @@ import java.util.*
 object ChatStorage {
     fun isSignedIn() = FirebaseAuthWorker.getUser() != null
 
+    fun getUserId() = FirebaseAuthWorker.getUser()?.uid
+
     private fun newId() = UUID.randomUUID().toString()
 
     private fun currTime() = System.currentTimeMillis()
 
     fun startListeningToChatPreviewList(onComplete: (chatList: List<ChatPreview>?) -> Unit) {
+        Log.i("stdout", "startListeningToChatPreviewList()")
         val userId = FirebaseAuthWorker.getUser()?.uid
         if (userId != null)
             FirebaseDbWorker.listenForChatListChanges(userId) { map, list ->
+                Log.i("stdout", "-->newList")
                 val newList = list?.mapNotNull { chat ->
                     with(chat) {
                         val respondentId = members[0]
@@ -37,7 +42,7 @@ object ChatStorage {
                         else
                             null
                     }
-                }
+                }?.sortedByDescending { it -> it.timestamp }
                 onComplete(newList)
             }
         else
@@ -45,21 +50,25 @@ object ChatStorage {
     }
 
     fun stopListeningToChatPreviewList() {
+        Log.i("stdout", "stopListeningToChatPreviewList()")
         FirebaseDbWorker.stopListeningForChatListChanges()
     }
 
     fun startListeningToChat(chatId: String, onComplete: (chatMessages: List<Message>?) -> Unit) {
+        Log.i("stdout", "startListeningToChat()")
         FirebaseDbWorker.listenForChatMessages(chatId) { list ->
-            val newList = list?.map { with(it) { Message(id, sender, timestamp, text) } }
+            val newList = list?.map { with(it) { Message(id, sender, timestamp, text) } }?.sortedBy { it -> it.timestamp }
             onComplete(newList)
         }
     }
 
     fun stopListeningToChat() {
+        Log.i("stdout", "stopListeningToChat()")
         FirebaseDbWorker.stopListeningForChatMessages()
     }
 
     fun getUserData(onComplete: (user: UserData?) -> Unit) {
+        Log.i("stdout", "getUserData()")
         val userId = FirebaseAuthWorker.getUser()?.uid
         if (userId != null) {
             FirebaseDbWorker.getUserInfo(userId) { user ->
@@ -71,10 +80,12 @@ object ChatStorage {
     }
 
     fun signOut() {
+        Log.i("stdout", "signOut()")
         FirebaseAuthWorker.signOut()
     }
 
     fun signIn(username: String, password: String, onComplete: (success: Boolean) -> Unit) {
+        Log.i("stdout", "signIn()")
         val email = UsernameUtils.mapToEmail(username)
         FirebaseAuthWorker.signInUser(email, password) { firebaseUser ->
             if (firebaseUser != null) {
@@ -91,6 +102,7 @@ object ChatStorage {
         occupation: String,
         onComplete: (success: Boolean) -> Unit
     ) {
+        Log.i("stdout", "signUp()")
         val email = UsernameUtils.mapToEmail(username)
         FirebaseAuthWorker.signUpUser(email, password) { firebaseUser ->
             if (firebaseUser != null) {
@@ -104,6 +116,7 @@ object ChatStorage {
     }
 
     fun sendMessage(chatId: String, text: String) {
+        Log.i("stdout", "sendMessage()")
         val userId = FirebaseAuthWorker.getUser()?.uid
         if (userId != null) {
             val message = FirebaseChatMessage(newId(), text, currTime(), userId)
@@ -112,6 +125,7 @@ object ChatStorage {
     }
 
     fun getUserList(onComplete: (userList: List<UserData>?) -> Unit) {
+        Log.i("stdout", "getUserList()")
         val userId = FirebaseAuthWorker.getUser()?.uid
         if (userId != null) {
             FirebaseDbWorker.getUserInfoList { list ->
@@ -127,6 +141,8 @@ object ChatStorage {
     }
 
     fun createChatWithUser(userId: String) {
+        Log.i("stdout", "createChatWithUser()")
+
         val myId = FirebaseAuthWorker.getUser()?.uid
         if (myId != null) {
             val chat = FirebaseChat(newId(), "", arrayListOf(myId, userId), currTime())
@@ -134,10 +150,16 @@ object ChatStorage {
         }
     }
 
-    fun changeOccupation(newOccupation: String) {
+    fun changeProfile(newUsername: String, newOccupation: String) : Boolean{
+        Log.i("stdout", "changeProfile()")
         val myId = FirebaseAuthWorker.getUser()?.uid
         if (myId != null) {
-            FirebaseDbWorker.updateUserOccupation(myId, newOccupation)
+            if (FirebaseAuthWorker.updateEmail(UsernameUtils.mapToEmail(newUsername)))
+                FirebaseDbWorker.updateUserProfile(myId, newOccupation, newUsername)
+            else
+                return false
+            return true
         }
+        return false
     }
 }

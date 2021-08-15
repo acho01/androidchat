@@ -21,7 +21,15 @@
             android:layout_height="?attr/actionBarSize"
             android:theme="@style/Widget.AppCompat.Toolbar"
             app:popupTheme="@style/Theme.AppCompat.Light">
-
+            <ImageButton
+                android:id="@+id/back_button"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                android:backgroundTint="#00FFFFFF"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/back_arrow" />
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 

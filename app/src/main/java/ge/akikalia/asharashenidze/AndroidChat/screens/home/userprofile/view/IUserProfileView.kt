@@ -4,6 +4,7 @@ import android.content.Context
 import ge.akikalia.asharashenidze.AndroidChat.common.ILoaderView
 
 interface IUserProfileView: ILoaderView {
-    fun displayUserProfile(username: String?, occupation: String?)
-    fun getContext(): Context
+    fun displayUserProfile(username: String, occupation: String)
+    fun startSignInView()
+    fun problemChangingEmail()
 }

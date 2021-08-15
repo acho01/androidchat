@@ -1,6 +1,7 @@
 package ge.akikalia.asharashenidze.AndroidChat.screens.add.view
 
 import android.os.Bundle
+import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,11 +18,14 @@ class AddActivity : AppCompatActivity(), IAddView {
 
     val presenter = AddPresenter(this)
 
+//    todo: need to call presenter search when client searches for users
+//    todo: need to call finish when back button is pressed
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add)
         initViews()
-        presenter.loadData()
+        presenter.onViewLoad()
     }
 
     fun initViews(){
@@ -29,6 +33,9 @@ class AddActivity : AppCompatActivity(), IAddView {
         userListRecyclerView = findViewById(R.id.userList)
         userListRecyclerView.layoutManager = LinearLayoutManager(this)
         userListRecyclerView.adapter = userListAdapter
+        findViewById<ImageButton>(R.id.back_button).setOnClickListener{
+            finish()
+        }
     }
 
     override fun updateList(list: List<UserData>) {
@@ -36,12 +43,19 @@ class AddActivity : AppCompatActivity(), IAddView {
         userListAdapter.notifyDataSetChanged()
     }
 
-    override fun displayError() {
-        TODO("Not yet implemented")
+    override fun closeView() {
+        finish()
     }
 
-    override fun addUser(id: String) {
+    override fun startLoader() {
+        //todo: need to implement
+    }
+
+    override fun stopLoader(error: Boolean) {
+        //todo: need to implement
+    }
+
+    override fun addUser(id: String){
         presenter.addUser(id)
     }
-
 }

@@ -40,4 +40,10 @@ object FirebaseAuthWorker {
     fun signOut() {
         mAuth.signOut()
     }
+
+    fun updateEmail(newEmail: String): Boolean {
+        val user = getUser()
+        user?.updateEmail(newEmail)
+        return user != null
+    }
 }
