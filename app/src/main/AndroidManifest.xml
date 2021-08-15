@@ -50,8 +50,7 @@
         </activity>
         <activity
             android:name="ge.akikalia.asharashenidze.AndroidChat.screens.register.view.RegisterActivity"
-            android:exported="true"
-            android:noHistory="true">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

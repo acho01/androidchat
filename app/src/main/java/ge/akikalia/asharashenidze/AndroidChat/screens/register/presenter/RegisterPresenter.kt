@@ -15,7 +15,7 @@ class RegisterPresenter(view: IRegisterView) {
         view = null
     }
 
-    fun signUpClicked(username: String, password: String, occupation: String){
+    fun signUpClicked(username: String, password: String, occupation: String, imageByteArray: ByteArray?){
         view?.startLoader()
         Log.i("stdout", "signing up user")
         ChatStorage.signUp(username, password, occupation){ success ->
