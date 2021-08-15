@@ -14,6 +14,7 @@ import ge.akikalia.asharashenidze.AndroidChat.R
 import ge.akikalia.asharashenidze.AndroidChat.model.ChatPreview
 import ge.akikalia.asharashenidze.AndroidChat.screens.chat.view.ChatActivity
 import ge.akikalia.asharashenidze.AndroidChat.screens.chat.view.ChatActivity.Companion.CHAT_ID
+import ge.akikalia.asharashenidze.AndroidChat.screens.home.main.dto.ChatPreviewDto
 import ge.akikalia.asharashenidze.AndroidChat.screens.home.main.presenter.MainChatListPresenter
 
 class MainChatListFragment : Fragment(), IMainChatListView {
@@ -22,7 +23,7 @@ class MainChatListFragment : Fragment(), IMainChatListView {
 
     val presenter = MainChatListPresenter(this)
     private lateinit var mainView: View
-    lateinit var chatPreviewList: List<ChatPreview>
+    lateinit var chatPreviewList: List<ChatPreviewDto>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -56,12 +57,12 @@ class MainChatListFragment : Fragment(), IMainChatListView {
         presenter.onViewDidLoad()
     }
 
-    override fun updateList(list: List<ChatPreview>){
+    override fun updateList(list: List<ChatPreviewDto>){
         chatPreviewList = list;
         updateAdapterList(chatPreviewList)
     }
 
-    private fun updateAdapterList(list: List<ChatPreview>) {
+    private fun updateAdapterList(list: List<ChatPreviewDto>) {
         chatPreviewListAdapter.list = list.
         filter { chatPreview -> chatPreview.lastMessage.equals("").not() }.
         filter{chatPreview -> chatPreview.username.contains(mainView.findViewById<TextInputEditText>(R.id.chat_list_search_input).text.toString()) }

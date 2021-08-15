@@ -1,9 +1,13 @@
 package ge.akikalia.asharashenidze.AndroidChat.screens.chat.presenter
 
+import ge.akikalia.asharashenidze.AndroidChat.common.TimeUtils
 import ge.akikalia.asharashenidze.AndroidChat.data.firebase.storage.ChatStorage
 import ge.akikalia.asharashenidze.AndroidChat.model.Message
 import ge.akikalia.asharashenidze.AndroidChat.screens.chat.view.IChatView
 import ge.akikalia.asharashenidze.AndroidChat.screens.chat.view.dto.MessageDto
+import java.security.Timestamp
+import java.text.SimpleDateFormat
+import java.util.*
 
 class ChatPresenter(var view: IChatView?) {
 
@@ -16,7 +20,7 @@ class ChatPresenter(var view: IChatView?) {
                     val newList = list.map { message ->
                         with(message){
                             //todo: need to format timestamp
-                            MessageDto(text, userId == senderId, timestamp.toString())
+                            MessageDto(text, userId == senderId, TimeUtils.format(timestamp))
                         }
                     }
                     view?.updateList(newList)
