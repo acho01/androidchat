@@ -89,7 +89,8 @@ class AddPresenter(private val view: IAddView){
     }
 
     fun addUser(id: String) {
-        ChatStorage.createChatWithUser(id)
+        val chatId = ChatStorage.createChatWithUser(id)
+        view.listItemClickedWithId(chatId)
         view.closeView()
     }
 }

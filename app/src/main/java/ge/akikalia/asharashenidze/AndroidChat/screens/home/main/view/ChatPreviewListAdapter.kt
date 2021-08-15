@@ -8,11 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import ge.akikalia.asharashenidze.AndroidChat.R
 import ge.akikalia.asharashenidze.AndroidChat.model.ChatPreview
 import ge.akikalia.asharashenidze.AndroidChat.model.Conversation
+import ge.akikalia.asharashenidze.AndroidChat.screens.home.main.dto.ChatPreviewDto
 
 
 class ChatPreviewListAdapter(val view: IMainChatListView): RecyclerView.Adapter<ChatPreviewListAdapter.ChatPreviewViewHolder>() {
 
-    var list = listOf<ChatPreview>()
+    var list = listOf<ChatPreviewDto>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatPreviewViewHolder {
         return ChatPreviewViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.chat_preview_list_item,parent, false))
@@ -21,7 +22,7 @@ class ChatPreviewListAdapter(val view: IMainChatListView): RecyclerView.Adapter<
     override fun onBindViewHolder(holder: ChatPreviewViewHolder, position: Int) {
         val packet = list[position]
         holder.itemView.setOnClickListener {
-            view.listItemClickedWithId(packet.id)
+            view.listItemClickedWithId(packet.id, packet.username)
         }
         holder.bindPacket(packet)
     }
@@ -33,7 +34,7 @@ class ChatPreviewListAdapter(val view: IMainChatListView): RecyclerView.Adapter<
 
     inner class ChatPreviewViewHolder(view: View): RecyclerView.ViewHolder(view){
 
-        fun bindPacket(chatPreview: ChatPreview) {
+        fun bindPacket(chatPreview: ChatPreviewDto) {
             name.text = chatPreview.username
             timePassed.text = chatPreview.timestamp.toString()
             lastMessage.text = chatPreview.lastMessage

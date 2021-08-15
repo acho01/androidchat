@@ -41,7 +41,7 @@
                     app:layout_collapseMode="pin"
                     android:layout_gravity="bottom">
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/search_bar"
+                        android:id="@+id/chat_list_search_bar"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:hint="@string/search_hint"
@@ -58,6 +58,7 @@
                         >
 
                         <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/chat_list_search_input"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             />

@@ -64,12 +64,15 @@ class ChatAdapter(var context: Context) :
     }
 
     inner class ReceivedMessageHolder(view: View) : RecyclerView.ViewHolder(view) {
+        var sender =
+            view.findViewById<TextView>(ge.akikalia.asharashenidze.AndroidChat.R.id.text_chat_user_other)
         var messageText =
             view.findViewById<TextView>(ge.akikalia.asharashenidze.AndroidChat.R.id.text_chat_message_other)
         var timeText =
             view.findViewById<TextView>(ge.akikalia.asharashenidze.AndroidChat.R.id.text_chat_time_other)
 
         fun bind(messageDto: MessageDto) {
+            sender.text = messageDto.sender
             messageText.text = messageDto.message
             timeText.text = messageDto.time.toString()
         }
