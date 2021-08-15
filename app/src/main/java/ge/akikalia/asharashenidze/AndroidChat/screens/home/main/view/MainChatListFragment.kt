@@ -63,9 +63,7 @@ class MainChatListFragment : Fragment(), IMainChatListView {
     }
 
     private fun updateAdapterList(list: List<ChatPreviewDto>) {
-        chatPreviewListAdapter.list = list.
-        filter { chatPreview -> chatPreview.lastMessage.equals("").not() }.
-        filter{chatPreview -> chatPreview.username.contains(mainView.findViewById<TextInputEditText>(R.id.chat_list_search_input).text.toString()) }
+        chatPreviewListAdapter.list = list
         chatPreviewListAdapter.notifyDataSetChanged()
     }
 
