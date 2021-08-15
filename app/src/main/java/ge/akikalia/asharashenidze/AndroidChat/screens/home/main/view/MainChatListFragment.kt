@@ -2,18 +2,19 @@ package ge.akikalia.asharashenidze.AndroidChat.screens.home.main.view
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.textfield.TextInputEditText
 import ge.akikalia.asharashenidze.AndroidChat.R
 import ge.akikalia.asharashenidze.AndroidChat.model.ChatPreview
 import ge.akikalia.asharashenidze.AndroidChat.screens.chat.view.ChatActivity
 import ge.akikalia.asharashenidze.AndroidChat.screens.chat.view.ChatActivity.Companion.CHAT_ID
 import ge.akikalia.asharashenidze.AndroidChat.screens.home.main.presenter.MainChatListPresenter
-import ge.akikalia.asharashenidze.AndroidChat.screens.login.view.LoginActivity
 
 class MainChatListFragment : Fragment(), IMainChatListView {
     private lateinit var chatPreviewListRecyclerView: RecyclerView
@@ -21,11 +22,19 @@ class MainChatListFragment : Fragment(), IMainChatListView {
 
     val presenter = MainChatListPresenter(this)
     private lateinit var mainView: View
+    lateinit var chatPreviewList: List<ChatPreview>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mainView = view
         initViews()
+        initListeners()
+    }
+
+    private fun initListeners() {
+        mainView.findViewById<TextInputEditText>(R.id.chat_list_search_input).addTextChangedListener {
+            updateAdapterList(chatPreviewList)
+        }
     }
 
     override fun onCreateView(
@@ -48,7 +57,14 @@ class MainChatListFragment : Fragment(), IMainChatListView {
     }
 
     override fun updateList(list: List<ChatPreview>){
-        chatPreviewListAdapter.list = list
+        chatPreviewList = list;
+        updateAdapterList(chatPreviewList)
+    }
+
+    private fun updateAdapterList(list: List<ChatPreview>) {
+        chatPreviewListAdapter.list = list.
+        filter { chatPreview -> chatPreview.lastMessage.equals("").not() }.
+        filter{chatPreview -> chatPreview.username.contains(mainView.findViewById<TextInputEditText>(R.id.chat_list_search_input).text.toString()) }
         chatPreviewListAdapter.notifyDataSetChanged()
     }
 
