@@ -7,4 +7,5 @@ interface IAddView: ILoaderView {
     fun updateList(list: List<UserData>)
     fun closeView()
     fun addUser(id: String)
+    fun listItemClickedWithId(id: String)
 }

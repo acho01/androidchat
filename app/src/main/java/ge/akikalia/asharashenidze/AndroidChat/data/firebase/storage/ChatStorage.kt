@@ -140,14 +140,17 @@ object ChatStorage {
         }
     }
 
-    fun createChatWithUser(userId: String) {
+    fun createChatWithUser(userId: String): String {
         Log.i("stdout", "createChatWithUser()")
 
         val myId = FirebaseAuthWorker.getUser()?.uid
+        var chatId = ""
         if (myId != null) {
-            val chat = FirebaseChat(newId(), "", arrayListOf(myId, userId), currTime())
+            chatId = newId()
+            val chat = FirebaseChat(chatId, "", arrayListOf(myId, userId), currTime())
             FirebaseDbWorker.createChat(chat)
         }
+        return chatId
     }
 
     fun changeProfile(newUsername: String, newOccupation: String) : Boolean{
