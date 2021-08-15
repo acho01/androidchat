@@ -11,9 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputEditText
 import ge.akikalia.asharashenidze.AndroidChat.R
-import ge.akikalia.asharashenidze.AndroidChat.model.ChatPreview
 import ge.akikalia.asharashenidze.AndroidChat.screens.chat.view.ChatActivity
 import ge.akikalia.asharashenidze.AndroidChat.screens.chat.view.ChatActivity.Companion.CHAT_ID
+import ge.akikalia.asharashenidze.AndroidChat.screens.chat.view.ChatActivity.Companion.SENDER_ID
 import ge.akikalia.asharashenidze.AndroidChat.screens.home.main.dto.ChatPreviewDto
 import ge.akikalia.asharashenidze.AndroidChat.screens.home.main.presenter.MainChatListPresenter
 
@@ -69,9 +69,10 @@ class MainChatListFragment : Fragment(), IMainChatListView {
         chatPreviewListAdapter.notifyDataSetChanged()
     }
 
-    override fun listItemClickedWithId(id: String) {
+    override fun listItemClickedWithId(chatId: String, sender: String) {
         val intent = Intent(activity, ChatActivity::class.java).apply {
-            putExtra(CHAT_ID, id)
+            putExtra(CHAT_ID, chatId)
+            putExtra(SENDER_ID, sender)
         }
         startActivity(intent)
     }

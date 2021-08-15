@@ -6,5 +6,6 @@ import ge.akikalia.asharashenidze.AndroidChat.screens.chat.view.dto.MessageDto
 
 interface IChatView: ILoaderView {
     abstract val chatId: String?
+    abstract val sender: String?
     fun updateList(list: List<MessageDto>)
 }

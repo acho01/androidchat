@@ -22,7 +22,7 @@ class ChatPreviewListAdapter(val view: IMainChatListView): RecyclerView.Adapter<
     override fun onBindViewHolder(holder: ChatPreviewViewHolder, position: Int) {
         val packet = list[position]
         holder.itemView.setOnClickListener {
-            view.listItemClickedWithId(packet.id)
+            view.listItemClickedWithId(packet.id, packet.username)
         }
         holder.bindPacket(packet)
     }

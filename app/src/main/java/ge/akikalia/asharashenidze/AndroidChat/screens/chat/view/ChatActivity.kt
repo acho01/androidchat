@@ -20,8 +20,10 @@ class ChatActivity() : AppCompatActivity(), IChatView{
 
     companion object{
         const val CHAT_ID = "chat_id"
+        const val SENDER_ID = "sender_id"
     }
     override var chatId: String? = null
+    override var sender: String? = null
     private lateinit var chatRecyclerView: RecyclerView
     private var chatAdapter = ChatAdapter(this)
     private val presenter = ChatPresenter(this)
@@ -32,6 +34,7 @@ class ChatActivity() : AppCompatActivity(), IChatView{
         initViews()
         initListeners()
         chatId = intent.getStringExtra(CHAT_ID)
+        sender = intent.getStringExtra(SENDER_ID)
     }
 
     override fun onResume() {

@@ -6,5 +6,5 @@ import ge.akikalia.asharashenidze.AndroidChat.screens.home.main.dto.ChatPreviewD
 
 interface IMainChatListView: ILoaderView {
     fun updateList(list: List<ChatPreviewDto>)
-    fun listItemClickedWithId(id: String)
+    fun listItemClickedWithId(chatId: String, sender: String)
 }

@@ -20,7 +20,7 @@ class ChatPresenter(var view: IChatView?) {
                     val newList = list.map { message ->
                         with(message){
                             //todo: need to format timestamp
-                            MessageDto(text, userId == senderId, TimeUtils.format(timestamp))
+                            MessageDto(text, view?.sender, userId == senderId, TimeUtils.format(timestamp))
                         }
                     }
                     view?.updateList(newList)
