@@ -1,14 +1,7 @@
 package ge.akikalia.asharashenidze.AndroidChat.screens.home.userprofile.presenter
 
 import android.util.Log
-import ge.akikalia.asharashenidze.AndroidChat.common.Action
-import ge.akikalia.asharashenidze.AndroidChat.common.ToastUtils
 import ge.akikalia.asharashenidze.AndroidChat.data.firebase.storage.ChatStorage
-import ge.akikalia.asharashenidze.AndroidChat.data.firebase.storage.auth.FirebaseAuthWorker
-import ge.akikalia.asharashenidze.AndroidChat.data.firebase.storage.db.FirebaseDbWorker
-import ge.akikalia.asharashenidze.AndroidChat.data.firebase.storage.db.FirebaseDbWorkerDelegate
-import ge.akikalia.asharashenidze.AndroidChat.data.firebase.storage.db.FirebaseDbWorkerError
-import ge.akikalia.asharashenidze.AndroidChat.model.UserData
 import ge.akikalia.asharashenidze.AndroidChat.screens.home.userprofile.view.IUserProfileView
 
 class UserProfilePresenter(var view: IUserProfileView?) {
@@ -37,10 +30,14 @@ class UserProfilePresenter(var view: IUserProfileView?) {
 
     fun updateLoggedUser(username: String, occupation: String) {
         view?.startLoader()
-        if (ChatStorage.changeProfile(username, occupation))
-            loadLoggedUserProfile()
-        else
-            view?.problemChangingEmail()
+        ChatStorage.changeProfile(username, occupation){ success ->
+            view?.stopLoader(false)
+            if (success) {
+                loadLoggedUserProfile()
+                view?.emailChangedSuccessfully()
+            }else
+                view?.problemChangingEmail()
+        }
     }
 
     fun signOut(){

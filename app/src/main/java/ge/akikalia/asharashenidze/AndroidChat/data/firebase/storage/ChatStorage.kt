@@ -150,16 +150,19 @@ object ChatStorage {
         }
     }
 
-    fun changeProfile(newUsername: String, newOccupation: String) : Boolean{
+    fun changeProfile(newUsername: String, newOccupation: String, onComplete: (success: Boolean) -> Unit){
         Log.i("stdout", "changeProfile()")
-        val myId = FirebaseAuthWorker.getUser()?.uid
-        if (myId != null) {
-            if (FirebaseAuthWorker.updateEmail(UsernameUtils.mapToEmail(newUsername)))
-                FirebaseDbWorker.updateUserProfile(myId, newOccupation, newUsername)
-            else
-                return false
-            return true
-        }
-        return false
+        val user = FirebaseAuthWorker.getUser()
+        if (user != null)
+            user.updateEmail(UsernameUtils.mapToEmail(newUsername))
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        FirebaseDbWorker.updateUserProfile(user.uid, newOccupation, newUsername)
+                        onComplete(true)
+                    }else
+                        onComplete(false)
+                }
+        else
+            onComplete(false)
     }
 }
