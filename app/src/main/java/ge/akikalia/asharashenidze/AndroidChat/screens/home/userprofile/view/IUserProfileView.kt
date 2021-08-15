@@ -7,4 +7,5 @@ interface IUserProfileView: ILoaderView {
     fun displayUserProfile(username: String, occupation: String)
     fun startSignInView()
     fun problemChangingEmail()
+    fun emailChangedSuccessfully()
 }

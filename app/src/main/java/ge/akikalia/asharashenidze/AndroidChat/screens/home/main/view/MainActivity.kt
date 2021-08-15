@@ -2,7 +2,9 @@ package ge.akikalia.asharashenidze.AndroidChat.screens.home.main.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
+import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -17,7 +19,6 @@ class MainActivity : AppCompatActivity() {
 
     private var mainListFragment = MainChatListFragment()
     private var profileFragment = ProfileFragment()
-
     private lateinit var addButton: FloatingActionButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,10 +26,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         initNavBarListeners()
         replaceFragment(mainListFragment)
-        initButtons()
+        initViews()
+
     }
 
-    private fun initButtons(){
+    private fun initViews(){
         addButton = findViewById(R.id.fab_button)
         addButton.setOnClickListener {
             val intent = Intent(this, AddActivity::class.java)

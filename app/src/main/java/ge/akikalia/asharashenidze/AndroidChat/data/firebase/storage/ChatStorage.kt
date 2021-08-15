@@ -31,13 +31,15 @@ object ChatStorage {
                     with(chat) {
                         val respondentId = members[0]
                         val username = map?.get(respondentId)?.username
-                        if (username != null)
+                        val image = map?.get(respondentId)?.imageUrl
+                        if (username != null && image != null)
                             ChatPreview(
                                 id,
                                 username,
                                 respondentId,
                                 lastMessage,
-                                lastMessageTimestamp
+                                lastMessageTimestamp,
+                                image
                             )
                         else
                             null
@@ -100,15 +102,18 @@ object ChatStorage {
         username: String,
         password: String,
         occupation: String,
+        imageName: String,
+        image: ByteArray?,
         onComplete: (success: Boolean) -> Unit
     ) {
         Log.i("stdout", "signUp()")
         val email = UsernameUtils.mapToEmail(username)
         FirebaseAuthWorker.signUpUser(email, password) { firebaseUser ->
             if (firebaseUser != null) {
-                val user = FirebaseUserInfo(firebaseUser.uid, username, occupation)
-                FirebaseDbWorker.createUserInfo(user)
-                onComplete(true)
+                val user = FirebaseUserInfo(firebaseUser.uid, username, occupation, imageName)
+                FirebaseDbWorker.createUserInfo(user, image){ success ->
+                    onComplete(success)
+                }
             } else {
                 onComplete(false)
             }
@@ -153,16 +158,25 @@ object ChatStorage {
         return chatId
     }
 
-    fun changeProfile(newUsername: String, newOccupation: String) : Boolean{
+    fun changeProfile(newUsername: String, newOccupation: String, onComplete: (success: Boolean) -> Unit){
         Log.i("stdout", "changeProfile()")
-        val myId = FirebaseAuthWorker.getUser()?.uid
-        if (myId != null) {
-            if (FirebaseAuthWorker.updateEmail(UsernameUtils.mapToEmail(newUsername)))
-                FirebaseDbWorker.updateUserProfile(myId, newOccupation, newUsername)
-            else
-                return false
-            return true
+        val user = FirebaseAuthWorker.getUser()
+        if (user != null)
+            user.updateEmail(UsernameUtils.mapToEmail(newUsername))
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        FirebaseDbWorker.updateUserProfile(user.uid, newOccupation, newUsername)
+                        onComplete(true)
+                    }else
+                        onComplete(false)
+                }
+        else
+            onComplete(false)
+    }
+
+    fun getImage(imageUrl: String, onComplete: (image: ByteArray?) -> Unit){
+        FirebaseDbWorker.getImage(imageUrl){
+            onComplete(it)
         }
-        return false
     }
 }

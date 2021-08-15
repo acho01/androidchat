@@ -75,6 +75,10 @@ class ProfileFragment : Fragment(), IUserProfileView {
         Toast.makeText(activity,resources.getText(R.string.profile_change_error_text), Toast.LENGTH_SHORT).show()
     }
 
+    override fun emailChangedSuccessfully() {
+        Toast.makeText(activity,resources.getText(R.string.profile_change_success_text), Toast.LENGTH_SHORT).show()
+    }
+
     override fun startLoader() {
         //todo: need to implement
     }
