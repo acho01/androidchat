@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,6 +25,7 @@ class MainChatListFragment : Fragment(), IMainChatListView {
     val presenter = MainChatListPresenter(this)
     private lateinit var mainView: View
     lateinit var chatPreviewList: List<ChatPreviewDto>
+    private lateinit var pBar: ProgressBar
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -50,6 +52,8 @@ class MainChatListFragment : Fragment(), IMainChatListView {
         chatPreviewListRecyclerView = mainView.findViewById(R.id.chat_preview_list)
         chatPreviewListRecyclerView.layoutManager = LinearLayoutManager(mainView.context)
         chatPreviewListRecyclerView.adapter = chatPreviewListAdapter
+        pBar = mainView.findViewById(R.id.pBar)
+        pBar.visibility = View.INVISIBLE
     }
 
     override fun onResume() {
@@ -78,11 +82,11 @@ class MainChatListFragment : Fragment(), IMainChatListView {
     }
 
     override fun startLoader() {
-        //todo: need to implement
+        pBar.visibility = View.VISIBLE
     }
 
     override fun stopLoader(error: Boolean) {
-        //todo: need to implement
+        pBar.visibility = View.INVISIBLE
     }
 
     override fun onPause() {
@@ -94,6 +98,4 @@ class MainChatListFragment : Fragment(), IMainChatListView {
         presenter.onDestroy()
         super.onDestroy()
     }
-
-
 }

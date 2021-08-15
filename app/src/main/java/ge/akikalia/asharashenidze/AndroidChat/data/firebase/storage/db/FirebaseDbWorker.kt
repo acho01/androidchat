@@ -5,6 +5,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.storage.FirebaseStorage
 import ge.akikalia.asharashenidze.AndroidChat.common.DispatchGroup
 import ge.akikalia.asharashenidze.AndroidChat.data.firebase.storage.model.*
 import kotlin.collections.HashMap
@@ -19,6 +20,8 @@ object FirebaseDbWorker {
     private val chatsRef = database.getReference("Chats")
 
     private val chatMessagesRef = database.getReference("ChatMessages")
+
+    private val storageRef = FirebaseStorage.getInstance().reference
 
     private var chatListListener: ValueEventListener? = null
 
@@ -173,13 +176,31 @@ object FirebaseDbWorker {
         chatsRef.child(chatId).child("lastMessageTimestamp").setValue(message.timestamp)
     }
 
-    fun createUserInfo(user: FirebaseUserInfo) {
-        usersRef.child(user.id).setValue(user)
-        userChatsRef.child(user.id).setValue(null)//(ArrayList<FirebaseUserChat>())
+    fun createUserInfo(user: FirebaseUserInfo, image: ByteArray?, onComplete: (Boolean) -> Unit) {
+        if  (user.imageUrl != "" && image != null){
+            storageRef.child(user.imageUrl).putBytes(image).addOnCompleteListener {
+                if (it.isSuccessful) {
+                    usersRef.child(user.id).setValue(user)
+                    userChatsRef.child(user.id).setValue(null)//(ArrayList<FirebaseUserChat>())
+                    onComplete(true)
+                }else
+                    onComplete(false)
+            }
+        }else{
+            usersRef.child(user.id).setValue(user)
+            userChatsRef.child(user.id).setValue(null)//(ArrayList<FirebaseUserChat>())
+            onComplete(true)
+        }
     }
 
     fun updateUserProfile(userId: String, occupation: String, username: String) {
         usersRef.child(userId).child("occupation").setValue(occupation)
         usersRef.child(userId).child("username").setValue(username)
+    }
+
+    fun getImage(imageUrl: String, onComplete: (ByteArray?) -> Unit){
+        storageRef.child(imageUrl).getBytes(Long.MAX_VALUE).addOnCompleteListener { result->
+            onComplete(result.result)
+        }
     }
 }

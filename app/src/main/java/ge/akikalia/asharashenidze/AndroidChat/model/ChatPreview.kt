@@ -5,5 +5,6 @@ class ChatPreview(
     val username: String,
     val respondentId: String,
     val lastMessage: String,
-    val timestamp: Long
+    val timestamp: Long,
+    val imageUrl: String
 )
